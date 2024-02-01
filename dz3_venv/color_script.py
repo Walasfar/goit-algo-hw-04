@@ -19,15 +19,19 @@ def main(user_path, indent='  ', depth=6):
     path = Path(user_path)
     
     if path.exists():
-        if depth:
+        # Якщо передали безпосередньо путь до файлу верне файл
+        if path.is_file():
+            return print(indent, item_back + item_color + str(path.name) + clear)
         
+        if depth:
+            
+            print(indent, folder_back + folder_color + str(path.name) + ' ↴' + Style.RESET_ALL)
             # Проходимося по папці
             for item in path.iterdir():    
                 if item.is_file(): # Перевірка на файл
-                    print(indent, item_back + item_color + str(item.name) + clear)
+                    print(indent+'  ', item_back + item_color + str(item.name) + clear)
                 
                 elif item.is_dir(): # Перевірка на папку
-                    print(indent, folder_back + folder_color + str(item.name) + ' ↴' + Style.RESET_ALL)
                     main(item, indent + '  ', depth - 1)
     else:
         print("File or direction is not exists.")
