@@ -11,7 +11,7 @@ item_back = Back.LIGHTCYAN_EX
 item_color = Fore.BLACK
 clear = Style.RESET_ALL
 
-def main(user_path, indent=' ', depth=5):
+def main(user_path, indent='  ', depth=6):
     """
     user_path - початковий путь
     indent - параметер за замовчуванням, кількість відступів - рекурсія
@@ -28,11 +28,14 @@ def main(user_path, indent=' ', depth=5):
                 
                 elif item.is_dir(): # Перевірка на папку
                     print(indent, folder_back + folder_color + str(item.name) + ' ↴' + Style.RESET_ALL)
-                    main(item, indent * 2, depth - 1)
+                    main(item, indent + '  ', depth - 1)
     else:
         print("File or direction is not exists.")
 
 
 
 if __name__ == '__main__':
-    main(str(sys.argv[1]))
+    if len(sys.argv) != 2:
+        print("Ви маєта передати путь да файла або деректорії як аргумент.")
+    else:
+        main(str(sys.argv[1]))
