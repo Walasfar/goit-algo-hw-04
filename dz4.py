@@ -48,6 +48,7 @@ def main():
                 
                 if len(contacts) == 0:
                     print("Base is empty.")
+                    
                 else:
                     print(show_base(contacts))
                 
